@@ -7,8 +7,7 @@
     Layer       : Silver
     Database    : DataWarehouse
     Purpose     : Create and define the Silver Layer tables
-    Version     : 1.0
-    Created     : 2026
+ 
 ===============================================================================
 
 Script Purpose:
