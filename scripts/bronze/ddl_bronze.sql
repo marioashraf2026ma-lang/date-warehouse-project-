@@ -1,33 +1,47 @@
 
+/*
+===============================================================================
+                    DATA WAREHOUSE PROJECT
+                         BRONZE LAYER
+===============================================================================
 
-use DataWarehouse
-
-
-/* 
-============================================================================
-DDL Script: Create Bronze Tables
-===========================================================
-
-
+Author      : Mario Kadess
+Project     : Data Warehouse
+Layer       : Bronze
+Database    : DataWarehouse
 
 Script Purpose:
-This script creates tables in the 'bronze' schema, dropping existing tables
-if they already exist.
-Run this script to re-define the DDL structure of 'bronze' Tables  
+    This script creates tables in the 'bronze' schema, dropping existing tables
+    if they already exist.
 
-===========================================================================
+    Run this script to re-define the DDL structure of the Bronze tables.
 
+===============================================================================
 */
 
 
+USE DataWarehouse;
 
 
-IF OBJECT_ID ('bronze.crm_cst_info', 'U') IS not null   
+/*
+===============================================================================
+DDL Script: Create Bronze Tables
+===============================================================================
+
+Script Purpose:
+    This script creates tables in the 'bronze' schema, dropping existing tables
+    if they already exist.
+
+    Run this script to re-define the DDL structure of the 'bronze' tables.
+
+===============================================================================
+*/
+
+
+IF OBJECT_ID ('bronze.crm_cst_info', 'U') IS NOT NULL   
 
 -- Check if the table already exists and delete it before recreating it.
-
-
-drop  table bronze.crm_cst_info ;
+DROP TABLE bronze.crm_cst_info;
 
 CREATE TABLE bronze.crm_cst_info (
     cst_id              INT, 
@@ -37,29 +51,32 @@ CREATE TABLE bronze.crm_cst_info (
     cst_marital_status  NVARCHAR(50),
     cst_gndr            NVARCHAR(50),
     cst_create_date     DATE
-) ;
-go
+);
+GO
 
 
-IF OBJECT_ID ('bronze.crm_prd_info', 'U') IS not null 
-drop  table bronze.crm_prd_info;
+IF OBJECT_ID ('bronze.crm_prd_info', 'U') IS NOT NULL
 
 -- Check if the table already exists and delete it before recreating it.
+DROP TABLE bronze.crm_prd_info;
+
 CREATE TABLE bronze.crm_prd_info ( 
     prd_id        INT,
     prd_key       NVARCHAR(50),
     prd_nm        NVARCHAR(50),
-    prd_cost      int,
+    prd_cost      INT,
     prd_line      NVARCHAR(50),
     prd_start_dt  DATETIME,
     prd_end_dt    DATETIME
 );
-go
+GO
 
-IF OBJECT_ID ('bronze.crm_sales_details', 'U') IS not null 
-drop  table bronze.crm_sales_details ;
+
+IF OBJECT_ID ('bronze.crm_sales_details', 'U') IS NOT NULL
 
 -- Check if the table already exists and delete it before recreating it.
+DROP TABLE bronze.crm_sales_details;
+
 CREATE TABLE bronze.crm_sales_details (
     sls_ord_num    NVARCHAR(50),
     sls_prd_key    NVARCHAR(50),
@@ -71,26 +88,29 @@ CREATE TABLE bronze.crm_sales_details (
     sls_quantity   INT,
     sls_price      INT 
 );
-go
+GO
 
 
 /*****************************************************/
 
-IF OBJECT_ID ('bronze.erp_cust_az12', 'U') IS not null 
-drop  table bronze.erp_cust_az12 ;
+
+IF OBJECT_ID ('bronze.erp_cust_az12', 'U') IS NOT NULL
+
 -- Check if the table already exists and delete it before recreating it.
+DROP TABLE bronze.erp_cust_az12;
 
 CREATE TABLE bronze.erp_cust_az12 (
     CID  VARCHAR(50),
     BDATE DATE,
     GEN  VARCHAR(50)
 );
-go
+GO
 
-IF OBJECT_ID ('bronze.erp_loc_a101', 'U') IS not null 
-drop  table bronze.erp_loc_a101 ;
+
+IF OBJECT_ID ('bronze.erp_loc_a101', 'U') IS NOT NULL
 
 -- Check if the table already exists and delete it before recreating it.
+DROP TABLE bronze.erp_loc_a101;
 
 CREATE TABLE bronze.erp_loc_a101 (
     CID   NVARCHAR(50),
@@ -98,16 +118,16 @@ CREATE TABLE bronze.erp_loc_a101 (
 );
 
 
-go 
 
-IF OBJECT_ID ('bronze.erp_px_cat_g1v2', 'U') IS not null 
-drop  table bronze.erp_px_cat_g1v2 ;
+IF OBJECT_ID ('bronze.erp_px_cat_g1v2', 'U') IS NOT NULL
+
 -- Check if the table already exists and delete it before recreating it.
-
+DROP TABLE bronze.erp_px_cat_g1v2;
 
 CREATE TABLE bronze.erp_px_cat_g1v2 (
     ID          NVARCHAR(50),
     CAT         NVARCHAR(50),
     SUBCAT      NVARCHAR(50),
     MAINTENANCE NVARCHAR(50)
-); 
+);
+GO
