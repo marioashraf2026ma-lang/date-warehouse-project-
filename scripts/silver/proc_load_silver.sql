@@ -1,5 +1,26 @@
 
 /*
+
+
+
+
+===============================================================================
+                         DATA WAREHOUSE PROJECT
+===============================================================================
+    Author      : Mario Kadess
+    Project     : Data Warehouse
+    Layer       : Silver
+    Database    : DataWarehouse
+    Purpose     : Load and transform clean data from Bronze Layer into Silver Layer
+    Version     : 1.0
+    Created     : 2026
+===============================================================================
+
+
+
+
+
+
 ===============================================================================
 Stored Procedure: Load Silver Layer (Bronze -> Silver)
 ===============================================================================
