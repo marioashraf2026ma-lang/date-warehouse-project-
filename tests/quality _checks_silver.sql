@@ -1,20 +1,32 @@
-
+```sql
 /*
 ===============================================================================
-Quality Checks
+                         DATA WAREHOUSE PROJECT
 ===============================================================================
+    Author      : Mario Kadess
+    Project     : Data Warehouse
+    Layer       : Silver
+    Database    : DataWarehouse
+    Purpose     : Perform data quality checks on the Silver Layer
+===============================================================================
+    
+
 Script Purpose:
-    This script performs various quality checks for data consistency, accuracy, 
-    and standardization across the 'silver' layer. It includes checks for:
-    - Null or duplicate primary keys.
+    This script performs various quality checks for data consistency,
+    accuracy, completeness, and standardization across the 'silver' layer.
+
+    The checks include:
+    - NULL or duplicate primary keys.
     - Unwanted spaces in string fields.
     - Data standardization and consistency.
     - Invalid date ranges and orders.
     - Data consistency between related fields.
+    - Invalid or unexpected values.
 
 Usage Notes:
-    - Run these checks after data loading Silver Layer.
+    - Run these checks after loading the Silver Layer.
     - Investigate and resolve any discrepancies found during the checks.
+
 ===============================================================================
 */
 
@@ -41,6 +53,7 @@ WHERE cst_key != TRIM(cst_key);
 SELECT DISTINCT 
     cst_marital_status 
 FROM silver.crm_cust_info;
+
 
 -- ====================================================================
 -- Checking 'silver.crm_prd_info'
@@ -80,6 +93,7 @@ SELECT
 FROM silver.crm_prd_info
 WHERE prd_end_dt < prd_start_dt;
 
+
 -- ====================================================================
 -- Checking 'silver.crm_sales_details'
 -- ====================================================================
@@ -93,7 +107,7 @@ WHERE sls_due_dt <= 0
     OR sls_due_dt > 20500101 
     OR sls_due_dt < 19000101;
 
--- Check for Invalid Date Orders (Order Date > Shipping/Due Dates)
+-- Check for Invalid Date Orders
 -- Expectation: No Results
 SELECT 
     * 
@@ -117,6 +131,7 @@ WHERE sls_sales != sls_quantity * sls_price
    OR sls_price <= 0
 ORDER BY sls_sales, sls_quantity, sls_price;
 
+
 -- ====================================================================
 -- Checking 'silver.erp_cust_az12'
 -- ====================================================================
@@ -133,6 +148,7 @@ SELECT DISTINCT
     gen 
 FROM silver.erp_cust_az12;
 
+
 -- ====================================================================
 -- Checking 'silver.erp_loc_a101'
 -- ====================================================================
@@ -141,6 +157,7 @@ SELECT DISTINCT
     cntry 
 FROM silver.erp_loc_a101
 ORDER BY cntry;
+
 
 -- ====================================================================
 -- Checking 'silver.erp_px_cat_g1v2'
@@ -158,3 +175,4 @@ WHERE cat != TRIM(cat)
 SELECT DISTINCT 
     maintenance 
 FROM silver.erp_px_cat_g1v2;
+```
